@@ -77,3 +77,45 @@ require_once get_theme_file_path( 'inc/register-block-styles.php' );
 
 // Block pattern and block category examples.
 require_once get_theme_file_path( 'inc/register-block-patterns.php' );
+
+
+/**
+ * Extend styles and scripts with bootstrap.
+ * assets/bootstrap/css/bootstrap.min.css
+ * assets/bootstrap/js/bootstrap.bundle.min.js
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function ekiline_block_theme_setup_extend() {
+	// Bootstrap styles editor.
+	add_editor_style( './assets/bootstrap/css/bootstrap.css' );
+}
+add_action( 'after_setup_theme', 'ekiline_block_theme_setup_extend', 0 );
+
+/**
+ * Enqueue the CSS and JS files.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function ekiline_block_theme_styles_extend() {
+	// Bootstrap styles frontend.
+	wp_enqueue_style(
+		'ekiline-block-theme-bootstrap-styles',
+		get_theme_file_uri( 'assets/bootstrap/css/bootstrap.css' ),
+		[],
+		EKILINE_BLOCK_THEME_VERSION
+	);
+	// Bootstrap scripts frontend, to footer.
+	wp_enqueue_script(
+		'ekiline-block-theme-bootstrap-scripts',
+		get_theme_file_uri( 'assets/bootstrap/js/bootstrap.bundle.min.js' ),
+		[],
+		EKILINE_BLOCK_THEME_VERSION,
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'ekiline_block_theme_styles_extend', 0 );
