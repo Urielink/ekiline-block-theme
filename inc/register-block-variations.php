@@ -26,3 +26,4 @@ function ekiline_block_theme_register_block_variation() {
 	);
 }
 add_action( 'enqueue_block_assets', 'ekiline_block_theme_register_block_variation' );
+ 
